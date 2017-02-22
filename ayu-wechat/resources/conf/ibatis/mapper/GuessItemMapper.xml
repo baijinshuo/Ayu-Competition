@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.template.framework.dao.GuessItemMapper" >
+  <resultMap id="BaseResultMap" type="com.template.framework.domain.GuessItem" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="guess_id" property="guessId" jdbcType="INTEGER" />
+    <result column="master_name" property="masterName" jdbcType="VARCHAR" />
+    <result column="master_img" property="masterImg" jdbcType="VARCHAR" />
+    <result column="guest_name" property="guestName" jdbcType="VARCHAR" />
+    <result column="guest_img" property="guestImg" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="result" property="result" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, guess_id, master_name, master_img, guest_name, guest_img, type, result, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from guess_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="getItemByGuessIdAndType" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from guess_item
+    where guess_id = #{guessId}
+    <if test="type!=null">
+    	and type = #{type}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from guess_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.template.framework.domain.GuessItem" >
+    insert into guess_item (id, guess_id, master_name, 
+      master_img, guest_name, guest_img, 
+      type, result, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{guessId,jdbcType=INTEGER}, #{masterName,jdbcType=VARCHAR}, 
+      #{masterImg,jdbcType=VARCHAR}, #{guestName,jdbcType=VARCHAR}, #{guestImg,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{result,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.template.framework.domain.GuessItem" >
+    insert into guess_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="guessId != null" >
+        guess_id,
+      </if>
+      <if test="masterName != null" >
+        master_name,
+      </if>
+      <if test="masterImg != null" >
+        master_img,
+      </if>
+      <if test="guestName != null" >
+        guest_name,
+      </if>
+      <if test="guestImg != null" >
+        guest_img,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="guessId != null" >
+        #{guessId,jdbcType=INTEGER},
+      </if>
+      <if test="masterName != null" >
+        #{masterName,jdbcType=VARCHAR},
+      </if>
+      <if test="masterImg != null" >
+        #{masterImg,jdbcType=VARCHAR},
+      </if>
+      <if test="guestName != null" >
+        #{guestName,jdbcType=VARCHAR},
+      </if>
+      <if test="guestImg != null" >
+        #{guestImg,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.template.framework.domain.GuessItem" >
+    update guess_item
+    <set >
+      <if test="guessId != null" >
+        guess_id = #{guessId,jdbcType=INTEGER},
+      </if>
+      <if test="masterName != null" >
+        master_name = #{masterName,jdbcType=VARCHAR},
+      </if>
+      <if test="masterImg != null" >
+        master_img = #{masterImg,jdbcType=VARCHAR},
+      </if>
+      <if test="guestName != null" >
+        guest_name = #{guestName,jdbcType=VARCHAR},
+      </if>
+      <if test="guestImg != null" >
+        guest_img = #{guestImg,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.template.framework.domain.GuessItem" >
+    update guess_item
+    set guess_id = #{guessId,jdbcType=INTEGER},
+      master_name = #{masterName,jdbcType=VARCHAR},
+      master_img = #{masterImg,jdbcType=VARCHAR},
+      guest_name = #{guestName,jdbcType=VARCHAR},
+      guest_img = #{guestImg,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      result = #{result,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
