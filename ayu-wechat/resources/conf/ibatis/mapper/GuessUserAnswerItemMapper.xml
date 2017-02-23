@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.template.framework.dao.GuessUserAnswerItemMapper">
+	<resultMap id="BaseResultMap"
+		type="com.template.framework.domain.GuessUserAnswerItem">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="answer_id" property="answerId" jdbcType="INTEGER" />
+		<result column="guess_item_id" property="guessItemId" jdbcType="INTEGER" />
+		<result column="answer" property="answer" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, answer_id, guess_item_id, answer, create_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from guess_user_answer_item
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from guess_user_answer_item
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.template.framework.domain.GuessUserAnswerItem">
+		<selectKey resultType="java.lang.Integer" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		insert into guess_user_answer_item (id, answer_id, guess_item_id,
+		answer, create_time)
+		values (#{id,jdbcType=INTEGER}, #{answerId,jdbcType=INTEGER},
+		#{guessItemId,jdbcType=INTEGER},
+		#{answer,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.template.framework.domain.GuessUserAnswerItem">
+		insert into guess_user_answer_item
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="answerId != null">
+				answer_id,
+			</if>
+			<if test="guessItemId != null">
+				guess_item_id,
+			</if>
+			<if test="answer != null">
+				answer,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="answerId != null">
+				#{answerId,jdbcType=INTEGER},
+			</if>
+			<if test="guessItemId != null">
+				#{guessItemId,jdbcType=INTEGER},
+			</if>
+			<if test="answer != null">
+				#{answer,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.template.framework.domain.GuessUserAnswerItem">
+		update guess_user_answer_item
+		<set>
+			<if test="answerId != null">
+				answer_id = #{answerId,jdbcType=INTEGER},
+			</if>
+			<if test="guessItemId != null">
+				guess_item_id = #{guessItemId,jdbcType=INTEGER},
+			</if>
+			<if test="answer != null">
+				answer = #{answer,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.template.framework.domain.GuessUserAnswerItem">
+		update guess_user_answer_item
+		set answer_id = #{answerId,jdbcType=INTEGER},
+		guess_item_id = #{guessItemId,jdbcType=INTEGER},
+		answer = #{answer,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>
