@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	<appender name="Console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] %5p %c{2}: %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="LogFile" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/template/template.log" />
+		<param name="MaxFileSize" value="100mb" />
+		<param name="maxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] %5p %c{2}: %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="ErrorLogFile" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/template/template-error.log" />
+		<param name="MaxFileSize" value="100mb" />
+		<param name="maxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] %5p %c{2}: %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">       
+            <param name="levelMin" value="error" />       
+            <param name="levelMax" value="error" />       
+            <param name="AcceptOnMatch" value="true" />       
+        </filter>
+	</appender>
+
+	<appender name="operateLog1" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/template/template-operateLog" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%m%n" />
+		</layout>
+	</appender>
+
+	<logger name="operateLog" additivity="false">
+		<level value="info" />
+		<appender-ref ref="operateLog1" />
+	</logger>
+	
+	<logger name="org" additivity="false">
+		<level value="error" />
+		<appender-ref ref="Console" />
+		<appender-ref ref="LogFile" />
+		<appender-ref ref="ErrorLogFile" />
+	</logger>
+	
+	<logger name="org.springframework" additivity="false">
+		<level value="error" />
+		<appender-ref ref="Console" />
+		<appender-ref ref="LogFile" />
+		<appender-ref ref="ErrorLogFile" />
+	</logger>
+	
+	<logger name="org.apache.commons.beanutils.converters" additivity="false">
+		<level value="error" />
+		<appender-ref ref="Console" />
+		<appender-ref ref="LogFile" />
+		<appender-ref ref="ErrorLogFile" />
+	</logger>
+	
+	<logger name="org.apache.commons.httpclient.util.IdleConnectionHandler" additivity="false">
+		<level value="info" />
+		<appender-ref ref="Console" />
+		<appender-ref ref="LogFile" />
+		<appender-ref ref="ErrorLogFile" />
+	</logger>
+	
+	<logger name="java.sql" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="Console" />
+		<appender-ref ref="LogFile" />
+		<appender-ref ref="ErrorLogFile" />
+	</logger>
+	
+	<logger name="freemarker" additivity="false">
+		<level value="error" />
+		<appender-ref ref="Console" />
+		<appender-ref ref="LogFile" />
+		<appender-ref ref="ErrorLogFile" />
+	</logger>
+	
+	<root>
+		<level value="debug" />
+		<appender-ref ref="Console" />
+		<appender-ref ref="LogFile" />
+		<appender-ref ref="ErrorLogFile" />
+	</root>
+</log4j:configuration>
