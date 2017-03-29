@@ -1,0 +1,13 @@
+.banner{display: block;}
+.main{ width: 100%; background: url("../../images/guess/indexbgtwo.jpg") no-repeat; background-size: 100% 100%; margin-top: -1px; padding-bottom: 0.5rem;}
+.content{ width: 90%; margin: 0 auto;}
+.one h3{ font-size: 0.49rem; color: #fff; line-height: 1rem;}
+.one .gz{ width: 100%;}
+.one .gz li{ font-size: 0.21rem; color: #fff; margin-bottom: 0.01rem;}
+.one .gz li p{ font-size: 0.19rem; color: #fff; text-indent: 2em;}
+
+.begin-btn{ width: 1.53rem; height: 0.38rem; border: 2px solid #fff; border-radius: 5px; -webkit-border-radius: 5px; margin: 0.5rem auto 0; font-size: 0.28rem; font-weight: 600; color: #f7ea12; text-align: center; line-height: 0.38rem;}
+.one .ewm{ width: 24%; display: block; margin: 0.3rem auto 0;}
+.footer{font-size: 0.14rem; color: #fff; letter-spacing: 0.1rem;
+    text-align: center;
+    margin-top: 0.2rem}
